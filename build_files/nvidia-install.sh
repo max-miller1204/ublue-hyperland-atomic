@@ -9,6 +9,9 @@ set -ouex pipefail
 FRELEASE="$(rpm -E %fedora)"
 AKMODNV_PATH="/tmp/akmods-nv-rpms"
 
+# Install dnf5-plugins for config-manager subcommand
+dnf5 install -y 'dnf5-command(config-manager)'
+
 # Show what's available for debugging
 find "${AKMODNV_PATH}"/
 
