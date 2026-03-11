@@ -19,7 +19,7 @@ dnf5 install -y \
     swaylock \
     swayidle \
     swaybg \
-    polkit-gnome \
+    lxpolkit \
     sddm \
     kanshi \
     brightnessctl
@@ -140,6 +140,22 @@ chmod +x /usr/libexec/flatpak-first-boot.sh
 cp /ctx/flatpak-first-boot.service /etc/systemd/system/flatpak-first-boot.service
 
 ###############################################################################
+# Homebrew — copy pre-built tarball and system files from ublue-os/brew
+###############################################################################
+cp -R /tmp/brew-system-files/usr/share/homebrew.tar.zst /usr/share/homebrew.tar.zst
+cp /tmp/brew-system-files/etc/profile.d/brew.sh /etc/profile.d/brew.sh
+mkdir -p /etc/security/limits.d
+cp /tmp/brew-system-files/etc/security/limits.d/30-brew-limits.conf /etc/security/limits.d/30-brew-limits.conf
+mkdir -p /usr/lib/tmpfiles.d
+cp /tmp/brew-system-files/usr/lib/tmpfiles.d/homebrew.conf /usr/lib/tmpfiles.d/homebrew.conf
+mkdir -p /usr/lib/systemd/system
+cp /tmp/brew-system-files/usr/lib/systemd/system/brew-setup.service /usr/lib/systemd/system/brew-setup.service
+cp /tmp/brew-system-files/usr/lib/systemd/system/brew-update.service /usr/lib/systemd/system/brew-update.service
+cp /tmp/brew-system-files/usr/lib/systemd/system/brew-update.timer /usr/lib/systemd/system/brew-update.timer
+cp /tmp/brew-system-files/usr/lib/systemd/system/brew-upgrade.service /usr/lib/systemd/system/brew-upgrade.service
+cp /tmp/brew-system-files/usr/lib/systemd/system/brew-upgrade.timer /usr/lib/systemd/system/brew-upgrade.timer
+
+###############################################################################
 # Enable system services
 ###############################################################################
 systemctl enable podman.socket
@@ -148,3 +164,6 @@ systemctl enable tlp.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 systemctl enable flatpak-first-boot.service
+systemctl enable brew-setup.service
+systemctl enable brew-update.timer
+systemctl enable brew-upgrade.timer

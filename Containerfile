@@ -10,6 +10,9 @@ COPY build_files /
 FROM ${IMAGE_REGISTRY}/akmods:main-${FEDORA_MAJOR_VERSION} AS akmods
 FROM ${IMAGE_REGISTRY}/akmods-nvidia-open:main-${FEDORA_MAJOR_VERSION} AS akmods_nvidia
 
+# Homebrew — pre-built tarball from ublue-os/brew
+FROM ${IMAGE_REGISTRY}/brew:latest AS brew
+
 # Base Image — plain Fedora bootc
 FROM quay.io/fedora/fedora-bootc:${FEDORA_MAJOR_VERSION}
 
@@ -22,6 +25,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     --mount=type=bind,from=akmods,src=/rpms/ublue-os,dst=/tmp/akmods-rpms \
     --mount=type=bind,from=akmods_nvidia,src=/rpms,dst=/tmp/akmods-nv-rpms \
+    --mount=type=bind,from=brew,src=/system_files,dst=/tmp/brew-system-files \
     /ctx/build.sh && \
     /ctx/nvidia-install.sh
 
