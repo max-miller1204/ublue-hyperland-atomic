@@ -42,11 +42,11 @@ dnf5 install -y \
 dnf5 install -y \
     htop \
     btop \
-    neofetch \
+    fastfetch \
     fzf \
     ripgrep \
     bat \
-    eza \
+    lsd \
     tmux
 
 # Dev Tools

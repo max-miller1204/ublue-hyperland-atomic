@@ -15,9 +15,9 @@ bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
 
 # Aliases
-alias ls='eza --icons'
-alias ll='eza -la --icons'
-alias lt='eza -laT --icons --level=2'
+alias ls='lsd'
+alias ll='lsd -la'
+alias lt='lsd -la --tree --depth=2'
 alias cat='bat --style=plain'
 alias grep='rg'
 alias vim='nvim'
