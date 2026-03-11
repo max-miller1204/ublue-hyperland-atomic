@@ -1,0 +1,21 @@
+{
+    "name": "ublue-hyperland-atomic",
+    "image": "ghcr.io/ublue-os/devcontainer:titanoboa",
+    "remoteUser": "ublue",
+    "containerUser": "ublue",
+    "runArgs": [
+        "--privileged",
+        "--security-opt", "label=disable"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "skellock.just",
+                "redhat.vscode-yaml",
+                "timonwong.shellcheck",
+                "foxundermoon.shell-format",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    }
+}

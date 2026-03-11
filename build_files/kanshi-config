@@ -1,0 +1,10 @@
+# Laptop-only profile
+profile laptop {
+    output eDP-1 enable mode 1920x1080 position 0,0 scale 1
+}
+
+# Docked profile — adjust output names and resolution to match your setup
+# profile docked {
+#     output eDP-1 enable mode 1920x1080 position 0,0 scale 1
+#     output DP-1 enable mode 2560x1440 position 1920,0 scale 1
+# }

@@ -1,0 +1,13 @@
+[Unit]
+Description=Flatpak first-boot setup
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=!/var/lib/flatpak-first-boot-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/flatpak-first-boot.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

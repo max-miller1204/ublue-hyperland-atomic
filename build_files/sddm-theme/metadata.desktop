@@ -1,0 +1,11 @@
+[SddmGreeterTheme]
+Name=Sway Dark
+Description=Minimal dark theme for SDDM
+Author=Custom
+Type=sddm-theme
+Version=1.0
+Website=
+Screenshot=
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations

@@ -1,0 +1,41 @@
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory sharehistory hist_ignore_dups hist_ignore_space
+
+# Completion
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# Key bindings
+bindkey -e
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
+
+# Aliases
+alias ls='eza --icons'
+alias ll='eza -la --icons'
+alias lt='eza -laT --icons --level=2'
+alias cat='bat --style=plain'
+alias grep='rg'
+alias vim='nvim'
+alias vi='nvim'
+
+# Prompt
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats ' %F{magenta}(%b)%f'
+setopt prompt_subst
+PROMPT='%F{blue}%~%f${vcs_info_msg_0_} %F{green}❯%f '
+
+# FZF integration
+if [ -f /usr/share/fzf/shell/key-bindings.zsh ]; then
+    source /usr/share/fzf/shell/key-bindings.zsh
+fi
+
+# Environment
+export EDITOR=nvim
+export VISUAL=nvim
+export TERMINAL=alacritty
