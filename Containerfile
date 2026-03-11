@@ -1,17 +1,17 @@
+# Global ARGs — must be before all FROM statements to be usable in them
+ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION:-42}"
+ARG IMAGE_REGISTRY=ghcr.io/ublue-os
+
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY build_files /
 
 # NVIDIA akmods — pre-built kernel modules from Universal Blue
-ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION:-42}"
-ARG IMAGE_REGISTRY=ghcr.io/ublue-os
 FROM ${IMAGE_REGISTRY}/akmods:main-${FEDORA_MAJOR_VERSION} AS akmods
 FROM ${IMAGE_REGISTRY}/akmods-nvidia-open:main-${FEDORA_MAJOR_VERSION} AS akmods_nvidia
 
-# Base Image — plain Fedora bootc (no ublue signature issues)
+# Base Image — plain Fedora bootc
 FROM quay.io/fedora/fedora-bootc:${FEDORA_MAJOR_VERSION}
-
-ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION:-42}"
 
 ### MODIFICATIONS
 ## Install packages, NVIDIA drivers, deploy configs, enable services
